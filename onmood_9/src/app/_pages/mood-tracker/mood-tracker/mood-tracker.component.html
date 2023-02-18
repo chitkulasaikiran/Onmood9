@@ -1,0 +1,281 @@
+<div class="main-wrapper">
+    <div class="container">
+        <div class="moodarea">
+            <div><img src="assets/img/line.png" /></div>
+            <div>
+                <h2>MOOD MAP - {{buttonsInfo[selectedOptionInd]}}</h2>
+            </div>
+            <div>
+                <!-- <img src="assets/img/plesent.png" /> -->
+                <div class="progress" *ngIf="pleasentPercentage > 0 || unpleasentPercentage > 0">
+                    <div class="progress-bar pleasent-bar" style="background-color: #008000;" role="progressbar"
+                        [style.width.%]="pleasentPercentage" attr.aria-valuenow="{{pleasentPercentage}}"
+                        aria-valuemin="0" aria-valuemax="100">Pleasent {{pleasentPercentage.toFixed(0)}}% </div>
+                    <div class="pt-2 text-center pt-4 text-light unpleasent-bar" style="background-color: #FF0000;"
+                        [style.width.%]="unpleasentPercentage">
+                        Unpleasent {{unpleasentPercentage.toFixed(0)}}%</div>
+                </div>
+                <div class="progress" *ngIf="pleasentPercentage == 0 && unpleasentPercentage == 0">
+                    <span style="padding: 24px; font-size: 16px; width: 100%;"> No Entries in last
+                        {{buttonsInfo[selectedOptionInd]}}</span>
+                </div>
+
+            </div>
+            <div class="capttxt">Feelings</div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-4 text-center thought order-1 order-sm-1 order-md-0">
+                <div *ngIf="ColumnThoughtsData.length > 0">
+                    <!-- <img src="assets/img/chart.png" /> -->
+                    <google-chart #chart [title]="title" [type]="columnType" [data]="ColumnThoughtsData"
+                        [columns]="columnThoughtNames" [options]="thoughtOptions" [width]="thoughtWidth"
+                        [height]="thoughtHeight" (select)="thoughtsClick($event)">
+                    </google-chart>
+                </div>
+                <div class="progress" *ngIf="ColumnThoughtsData.length === 0">
+                    <span style="padding: 24px; font-size: 16px; width: 100%;"> No Entries in last
+                        {{buttonsInfo[selectedOptionInd]}}</span>
+                </div>
+                <div class="moodtxt">Type of Thoughts</div>
+            </div>
+            <div class="col-md-4 text-center order-0 order-sm-0 order-md-1">
+                <div *ngIf="data.length > 0">
+                    <!-- <img src="assets/img/mood1.png" alt="" /> -->
+                    <google-chart [title]="title" [type]="type" data-toggle="modal" [data]="data" 
+                    [options]=" deviceWidth > deviceHeight ? mood_options_web : mood_options_mobile"
+                        [columns]="columnNames" (select)="openThougtsChartPopup($event)">
+                    </google-chart>
+                </div>
+                <div class="progress" *ngIf="data.length === 0">
+                    <span style="padding: 24px; font-size: 16px; width: 100%;"> No Entries in last
+                        {{buttonsInfo[selectedOptionInd]}}</span>
+                </div>
+                <div class="moodtxt">Moods</div>
+            </div>
+
+            <div class="col-md-4 text-center mt-5 order-sm-2 order-2 order-md-2">
+                <div>
+                    <button type="button" data-toggle="modal" data-target="#exampleModal1" class="add-fill-btn">
+                        Add Feelings and Thoughts
+                    </button>
+
+                </div>
+                <div>
+                    <button type="button" class="weekbtn"
+                        [ngStyle]="{'background-color': selectedOptionInd === 0 ? '#ff7b35' : null }"
+                        (click)="selectedOptionInd = 0;getData()">
+                        1 WEEK
+                    </button>
+                </div>
+                <div>
+                    <button type="button" class="weekbtn"
+                        [ngStyle]="{'background-color': selectedOptionInd === 1 ? '#ff7b35' : null }"
+                        (click)="selectedOptionInd = 1;getData()">
+                        1 MONTH
+                    </button>
+                </div>
+                <div>
+                    <button type="button" class="weekbtn"
+                        [ngStyle]="{'background-color': selectedOptionInd === 2 ? '#ff7b35' : null }"
+                        (click)="selectedOptionInd = 2;getData()">
+                        1 YEAR
+                    </button>
+                </div>
+                <div>
+                    <button type="button" class="weekbtn"
+                        [ngStyle]="{'background-color': selectedOptionInd === 3 ? '#ff7b35' : null }"
+                        (click)="selectedOptionInd = 3;getData()">
+                        TILL DATE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal pmodel" role="dialog" tabindex="-1" [ngStyle]="{'display':display}">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document" *ngIf="selectedSlice.length > 0">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="staticBackdropLabel">
+                    {{selectedSlice[0]?.moodName}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onCloseHandled()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-5 mt-3">
+                    Your Mood of <span style="font-weight: bold;">&nbsp;{{selectedSlice[0]?.moodName}}
+                    </span>in
+                    <span style="font-weight: bold;">&nbsp;{{buttonsInfo[selectedOptionInd]}}</span> is
+                    triggered by
+                    following thoughts
+                </div>
+                <div class="piearea mb-5">
+                    <google-chart [type]="type" [data]="selectedSliceThoughts" [columns]="moodThoughtsColumnNames"
+                        [options]="thoughtsOptions" (select)="openThougtsChartPopup($event)">
+                    </google-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal pmodel" tabindex="-1" role="dialog" [ngStyle]="{'display':thoughtModaldisplay}">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="staticBackdropLabel">
+                    {{selectedThought}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="thoughtClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-5 mt-3">
+                    Your Thoughts related to <span style="font-weight: bold;">&nbsp;{{selectedThought}}
+                    </span>in
+                    <span style="font-weight: bold;">&nbsp;{{buttonsInfo[selectedOptionInd]}}</span> have generated
+                    following Moods
+                </div>
+                <div class="piearea mb-5" *ngIf="moodThoughtsData.length > 0">
+                    <google-chart [type]="type" [data]="moodThoughtsData" [columns]="moodThoughtsColumnNames"
+                        [options]="moodsThoughtsOptions" (select)="openThougtsChartPopup($event)">
+                    </google-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal pmodel fade " id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">{{popupTitle[addFeelingIndex].title}}</h5>
+                <button type="button" #closeIcon class="close" data-dismiss="modal" aria-label="Close" (click)="addFeelingIndex = 0; pleasentUnPleasentValue = ''; thoughtsValue = ''; selectedEmotion = '';">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" *ngIf="addFeelingIndex === 0">
+                <div class="felling">
+                    <h3>How are you feeling now?</h3>
+                    <ul>
+                        <li>-Close your eyes and try to indentify the dominant feeling in your
+                            mind at this moment</li>
+                        <li>-Mark it below, if it is pleasent or unpleasant</li>
+                    </ul>
+
+                </div>
+                <div class="feeling-area">
+                    <div class="row">
+                        <div class="col-sm-6" (click)="addFeelingIndex = 1;isPleasent = true"><img src="assets/img/plesant.png" /></div>
+                        <div class="col-sm-6" (click)="addFeelingIndex = 1;isPleasent = false"><img src="assets/img/unplesent.png" /></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" *ngIf="addFeelingIndex === 1 && isPleasent === true">
+                <div class="felling">
+                    <h3>Try to identify the dominant emotion in your feelings<span
+                            class="mt-3">Mark the emotion in the roup below</span></h3>
+                </div>
+                
+                <div class="hapemotion-sect">
+                    <div *ngFor="let emotion of pleasantEmotions">
+                        <div>
+                            <h3>{{emotion.title}}</h3>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <ul>
+                                    <li *ngFor="let synonym of emotion.synonyms">
+                                        <figure><i class="fab-solid fab-circle"></i></figure>
+                                        {{synonym}}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <div>
+                                    <div><img [src]="emotion.image" /></div>
+                                    <div><input type="checkbox" class="custom_checkbox"
+                                            id="{{emotion.id}}" [value]="emotion.code"
+                                            (change)="pleasentUnPleasentCheck($event, emotion)"
+                                            [checked]="pleasentUnPleasentValue === emotion.code">
+                                        <label for="{{emotion.id}}"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <button type="button" class="radius-drkbtn" [disabled]="pleasentUnPleasentValue == ''" (click)="addFeelingIndex = 2">Next</button>
+                </div>
+            </div>
+            <div class="modal-body" *ngIf="addFeelingIndex === 1 && isPleasent === false">
+                <div class="felling ">
+                    <h3>Try to identify the dominant emotion in your feelings <span class="mt-3">Mark the emotion in the group
+                            below</span></h3>
+                </div>
+                
+                <div class="emotion-sect">
+                    <div *ngFor="let emotion of unpleasantEmotions">
+                        <div>
+                            <h3>{{emotion.title}}</h3>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <ul>
+                                    <li *ngFor="let synonym of emotion.synonyms">
+                                        <figure><i class="fab-solid fab-circle"></i></figure>
+                                        {{synonym}}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <div>
+                                    <div><img [src]="emotion.image" /></div>
+                                    <div><input type="checkbox" class="custom_checkbox"
+                                            id="{{emotion.id}}"
+                                            [value]="emotion.code"
+                                            (change)="pleasentUnPleasentCheck($event, emotion)"
+                                            [checked]="pleasentUnPleasentValue === emotion.code">
+                                        <label for="{{emotion.id}}"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3"><button type="button" class="radius-drkbtn" [disabled]="pleasentUnPleasentValue == ''" (click)="addFeelingIndex = 2; ">Next</button>
+                </div>
+            </div>
+            <div class="modal-body" *ngIf="addFeelingIndex === 2">
+                <div class="felling ">
+                    <h3>Try to identify the dominant thought in your mind which is leading to
+                        this feeling of {{selectedEmotion}}<span class="mt-3">Mark the type of thought which is
+                            matching closest to the dominant thought in your mind</span></h3>
+                </div>
+
+                <div class="thoughtarea">
+
+                    <div class="thought-box" *ngFor="let thought of thoughtsData">
+                        <div>
+                            <h3>{{thought.title}} <span>example -</span></h3>                            
+                        </div>
+                        <ul>
+                            <li *ngFor="let image of thought.images">
+                                <figure><img [src]="image.src" /> </figure> {{image.name}}
+                            </li>
+                        </ul>
+                        <div class="text-right">
+                            <input type="checkbox" class="custom_checkbox" id="{{thought.id}}"  [value]="thought.code"
+                            (change)="thoughtsCheck($event)" [checked]="thoughtsValue === thought.code">
+                            <label for="{{thought.id}}"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3"><button type="button" (click)="save()" class="radius-drkbtn" [disabled]="thoughtsValue == ''" >Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+.circle {
+    border-radius: 200px;
+    color: black;
+    height: 150px;
+    width: 150px;
+    border: solid 6px #254e45;
+}
+/* .circle p {
+    vertical-align: middle;
+    display: table-cell;
+} */
+.font-weight{
+    font-weight: bold;
+}

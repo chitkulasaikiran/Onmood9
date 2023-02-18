@@ -1,0 +1,77 @@
+<div class="main-wrapper">
+    <!-- <section id="breadcrumbs" class="breadcrumbs"> -->
+        <div class="container text-center" style="margin-top: 45px;">
+            <!-- <div class="d-flex justify-content-between align-items-center">
+                <h2><strong>Blog</strong></h2>
+            </div> -->
+            <!-- <div class="d-flex justify-content-between align-items-center mt-5 modul-head"> -->
+                <!-- <div style="opacity: 0;"><img src="assets/img/wht-arrow.png" /></div> -->
+                <div><span class="module-name">Blog</span></div>
+                <!-- <div>&nbsp;</div> -->
+            <!-- </div> -->
+        </div>
+    <!-- </section>======= Blog Section ======= -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 entries">
+                    <article class="entry entry-single" data-aos="fade-up" *ngIf="selectedBlog">
+                        <div class="entry-img" *ngIf="selectedBlog.media_type === 'image' || selectedBlog.media_type === 'text'">
+                            <img [src]="blogImagesPath + selectedBlog.media_file" alt="" class="img-fluid">
+                            <!-- <img [src]="testImage" alt="" class="img-fluid"> -->
+                        </div>
+                        <div class="entry-img" *ngIf="selectedBlog.media_type === 'video'">
+                            <video  style="width: 100%;" [src]="blogImagesPath+selectedBlog.media_file" controls></video>
+                        </div>
+                        <h2 class="entry-title">
+                            {{selectedBlog.title}}
+                        </h2>
+                       
+                        <div class="entry-meta">
+                            <ul>
+                                <li class="d-flex align-items-center">
+                                    <i class="fa fa-user"></i>
+                                    <a>{{selectedBlog.author}}</a>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i class="fa fa-clock" aria-hidden="true"></i>
+                                    <span>{{selectedBlog.publish_date  | date: 'dd-MMM-yyyy'}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="entry-content">
+                            
+                            <div [innerHTML]= "selectedBlog.read_more_descr | safeHtml"></div>
+                            
+                            <div class="entry-footer clearfix">
+                                <div class="share-links">
+                                    <a href="{{shareTwitterLink}}" target="_blank" class="twitter">
+                                        <i class="fab fa-twitter fa-fw"></i>
+                                    </a>
+                                    <a href="{{shareFacebookLink}}" target="_blank" class="facebook">
+                                        <i class="fab fa-facebook fa-fw"></i>
+                                    </a>
+                                    <a href="{{shareInstagramLink}}"  target="_blank" class="instagram">
+                                        <i class="fab fa-instagram fa-fw"></i>
+                                    </a>
+                                    <a href="{{shareWhatsAppLink}}"  target="_blank" class="whatsapp">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                    <a href="{{shareLinkedInLink}}"  target="_blank" class="linkedin">
+                                        <i class="fab fa-linkedin fa-fw"></i>
+                                    </a>
+                                    <a href="{{sharePinterestLink}}"  target="_blank" class="pinterest">
+                                        <i class="fab fa-pinterest fa-fw"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-lg-4">
+                    <app-blog-search [isBlogDetail]="true"></app-blog-search>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>

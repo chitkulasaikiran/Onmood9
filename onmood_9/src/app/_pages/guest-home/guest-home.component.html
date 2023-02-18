@@ -1,0 +1,155 @@
+<div class="main-wrapper home">
+    
+    <div class="main-head">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 order-first">
+                    <div class="headcapt">
+                        <div>
+                            <i>LEARN & PRACTICE</i>
+                            <h1>EMOTIONAL <span>SELF-CARE</span></h1>
+                            <p>FOR A HAPPY & HEALTHY MIND</p>
+                        </div>
+                        <div>
+                            <!-- <button type="button" class="btn-signin"  (click)="navigateToSignin()">SIGN IN</button> -->
+                            <button type="button" class="btn-signin" data-toggle="modal" data-target="#sign-in">SIGN IN</button>
+                            <div class="modal fade" id="sign-in" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <app-signin [type]='signin'></app-signin>
+                            </div>
+                        </div>
+                        <div class="signfree">
+                            <a href="" data-toggle="modal" data-target="#sign-up">SIGN UP</a> for free access
+                            <!-- <a style="color: #FF7B35;" (click)="navigateToSignin()">SIGN UP</a> for free access -->
+                            <div class="modal fade" id="sign-up" tabindex="-1" aria-labelledby="sign-up1" aria-hidden="true">
+                                <app-signin [type]="signup"></app-signin>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="button" class="btn-knowmore"><img src="assets/img/ionic-ios-play-circle.png" alt="" />Know More</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-last">
+                    <div class="rht-img"><img src="assets/img/img.png" alt="" class="mood-img" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Moods -->
+    <div class="container moods">
+        <div class="row">
+            <div class="col-md-12 col-lg-6 mood-opt text-center"><img src="assets/img/mood.png" alt="" /></div>
+            <div class="col-md-12 col-lg-5 modds">
+                <div class="moods-desc">
+                    <div>
+                        <h2 class="text-right">ONMOOD<span>9</span></h2>
+                    </div>
+                    <p>
+                        Emotions make you happy and sad, motivate you for hard work and support you in failures, they make you enjoy your success and regret your losses. All your actions & behaviour are governed by your emotions and Moods.
+                        <br />
+                        <br />
+                        There are 4 pleasant and 4 unpleasant Moods, triggered by different thoughts and situations. You need to control and balance these 8 Moods, to reach the 9th Mood of calm & Bliss. Onmood9 by combination of techniques
+                        from ancient meditation and modern psychology helps you manage negative & extreme emotions like Anger, anxiety, depression and cultivate positive moods & habits like Joy, compassion, self-acceptance, forgiveness &
+                        gratitude.
+                    </p>
+                </div>
+                <div class="moods-watermark">9 MOODS</div>
+            </div>
+        </div>
+    </div>
+
+    <!--assesment  -->
+    <div class="assesment container ptb100">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-3">
+                <div class="asses-box">
+                    <div><img src="assets/img/icon1.png" alt="" /></div>
+                    <div>
+                        <h3>SELF-ASSESSMENT</h3>
+                    </div>
+                    <p>Emotional assessment to judge emotional status and provide recommendation for improvement</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-3">
+                <div class="asses-box">
+                    <div><img src="assets/img/icon2.png" alt="" /></div>
+                    <div>
+                        <h3>SELF-LEARNING</h3>
+                    </div>
+                    <p>Courses & Videos by psychologist & meditation trainers to nurture and manage emotions</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-3">
+                <div class="asses-box">
+                    <div><img src="assets/img/icon3.png" alt="" /></div>
+                    <div>
+                        <h3>SELF-TRACKING</h3>
+                    </div>
+                    <p>Learn to identify and monitor your Feelings, Moods & Thought through trackers and charts</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-3">
+                <div class="asses-box">
+                    <div><img src="assets/img/icon4.png" alt="" /></div>
+                    <div>
+                        <h3>SELF-HEALING</h3>
+                    </div>
+                    <p>Guided, movements & Breathing exercises, Contemplation & Meditation, Sleep training & Music</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--emotion-area  -->
+    <div class="emotion-area">
+        <div class="emotions ptb100">
+            <div class="container">
+                <div class="d-md-block d-lg-none text-center layer-yog mb-5"><img src="assets/img/web-image-four.png" alt="" /></div>
+                <div class="layerdes">
+                    Emotions not only influence your thoughts, decisions and actions but also affect all 4 layers of your consciousness, that is Body, Energy, Mind & Wisdom. Onmood9 takes a holistic approach to emotional wellbeing and
+                    guides you step by step to manage the impact of emotions at all 4 layers.
+                </div>
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="layerarea">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="layers-sect">
+                                        <div class="layer-type">BODY</div>
+                                        <div class="layer-dtl">Mindful movements & Gestures to control intense emotions and behaviour</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="layers-sect">
+                                        <div class="layer-type">ENERGY</div>
+                                        <div class="layer-dtl">Breathing exercises & Self-healing to cultivate positive energy and emotions</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="layers-sect">
+                                        <div class="layer-type">MIND</div>
+                                        <div class="layer-dtl">Contemplation & Self-help Cognitive techniques to manage negative thoughts</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="layers-sect">
+                                        <div class="layer-type">WISDOM</div>
+                                        <div class="layer-dtl">Guided Meditation to manage Moods & reprogram the subconscious</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="emotions-watermark">4 LAYERS</div>
+        </div>
+        <div class="emotion-rght d-md-none d-lg-block"><img src="assets/img/web-image-four.png" alt="" /></div>
+    </div>
+
+    <!-- WhatsApp icon -->
+    <a href="https://wa.me/918897045351" class="float" target="_blank">
+		<i class="fab fa-whatsapp my-float"></i>
+    </a>
+</div>

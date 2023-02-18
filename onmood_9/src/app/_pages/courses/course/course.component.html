@@ -1,0 +1,73 @@
+<div style="margin-top: 20px; min-height: 350px;" class="main-wrapper">
+    <div class="paybutton" (click)="gotoActiveModule()" *ngIf="displayTabs && isCurrentActiveModule">
+        <span>Continue - {{isCurrentActiveModule && currentActiveModule.module_name}}</span><img style="margin-left: 7px;" src="assets/img/play1.png" alt="" />
+    </div>
+    
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services" *ngIf="!displayTabs">
+        <div class="container">
+            <app-learn-assessment-tabs [activeIndex]="0"></app-learn-assessment-tabs>
+            
+            <div class="row mt-5">
+				<div class="col-md-6 text-center mb-4" routerLink="/onmood-course/{{onmoodCourseId}}/course/{{category.id}}/groups" *ngFor="let category of categories">
+					<div class="prod-img"><img [src]="imagePath + category.media_value" src="assets/img/larg1.jpg" /></div>
+					<div class="learn-video mt-3"><a href="">{{category.name}}</a></div>
+				</div>
+			</div>
+        </div>
+    </section><!-- End Services Section -->
+    <!-- ======= Meditate and Relax Section ======= -->
+    <section id="services" class="services " *ngIf="displayTabs">
+        <div class="container" data-aos="fade-up">
+            <div class="text-center">
+				<button  type="button" (click)="switchTab(i)" class="lrg-btn " [ngClass]="category.isActive ? 'active' : ''" *ngFor="let category of categories; index as i">{{category.name}}</button>
+			</div>
+           
+            <div class="ptb60" style="margin-bottom: 40px;">
+                <div class="grup-head d-flex justify-content-between align-items-center" *ngIf="isVideoAvailable">
+                    <div class="prod-img">
+                        <video *ngIf="isVideoThumbAvailable" poster="{{videoThumbNail}}" id="video2" #video2 style="border-radius: 20px; width: 315px;">
+                            <source  src="{{categoryVideoUrl}}" type="video/mp4">
+                        </video>
+                        <video *ngIf="!isVideoThumbAvailable" id="video2" #video2 style="border-radius: 20px; width: 315px;">
+                            <source  src="{{categoryVideoUrl}}" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="text-center">
+                        <div>
+                            <p>{{selectedCourse.description}}</p>
+                        </div>
+                        <div>
+                            <button (click)="playVideo()" type="button" class="light-btn">Watch Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="category" *ngFor="let group of courseGroups; index as i">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>{{group.group_name}}</h5>
+                    <a class="viewmore" routerLink="/onmood-course/{{categoryId}}/course/{{courseId}}/group/{{group.id}}/modules">View All ></a>
+                </div>
+                <carousel class="carousel-html-content" style="z-index: 0" #carouselUseCase="carousel"
+                    [height]="group.height" [cellsToShow]="group.customOptions.items" [loop]="false"
+                    [arrows]="false" (events)="gotoFeaturedModuleDetails($event, i, group)">
+                    <div class="carousel-cell item" *ngFor="let module of group.modules; index as j">
+                        <div class="prod-img">
+                            <img [src]="moduleImagePath + module.module_image" alt=""/>
+                            <i *ngIf="module.showLockIcon" class="fa fa-lock lock-icon"></i>
+                        </div>
+                        <div class="category-name"><a href="">{{ module?.module_name }}</a></div>
+                    </div>
+                </carousel>
+            </div>
+        </div>
+    </section>
+    <div class="videoDiv" #videoDiv>
+        <span class="closeVideoIcon" #closeVideoIcon (click)="closeVideo()">X</span>
+        <video controls id="video1" #video1 controlsList="nodownload"
+        style="width: 100%; height: 0; margin:0 auto;">
+            <source src="{{categoryVideoUrl}}" type="video/mp4">
+            Your browser doesn't support HTML5 video tag.
+        </video>
+    </div>
+</div>

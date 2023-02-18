@@ -1,0 +1,139 @@
+<div class="main-wrapper" #carosalHeader style="margin-top: 30px;">
+    <div class="container">
+
+        <div class="timer-area">
+			<div class="row">
+				<div class="col-6">
+					<div class="time-box"  style="cursor: pointer;" (click)="navigatetimeTracker()">
+						<div class="time-ect">
+							<figure><img src="assets/img/timer.png" alt="" /></figure>
+							<div class="time">{{ completedHours }}</div>							
+						</div>
+						<div class="estimate">Time Spent in last 30 days</div>
+						<div class="onlinke" (click)="navigatetimeTracker()">
+                            <a style="color: #FF7B35;">My Journey <img src="assets/img/arrow.png" alt="" /></a></div>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="text-center" style="cursor: pointer;" (click)="navigateMoods()">
+						<div>
+                            <!-- <img src="assets/img/process.png" alt="" /> -->
+                            <div class="progress" *ngIf="pleasentPercentage > 0 || unpleasentPercentage > 0">
+                                <div class="progress-bar pleasent-bar" style="background-color: #008000" role="progressbar"
+                                    [style.width.%]="pleasentPercentage" attr.aria-valuenow="{{ pleasentPercentage }}" aria-valuemin="0"
+                                    aria-valuemax="100">
+                                    {{ pleasentPercentage.toFixed(0) }}%
+                                </div>
+                                <div class="progress-bar unpleasent-bar" style="background-color: #ff0000"
+                                    [style.width.%]="unpleasentPercentage" role="progressbar"
+                                    attr.aria-valuenow="{{ unpleasentPercentage }}" aria-valuemin="0" aria-valuemax="100">
+                                    {{ unpleasentPercentage.toFixed(0) }}%
+                                </div>
+                            </div>
+                            <div class="progress no-entries"
+                                *ngIf="pleasentPercentage == 0 && unpleasentPercentage == 0">
+                                No Entries
+                            </div>
+                        </div>
+						<div class="estimate">Feelings in last 30 days</div>
+						<div class="onlinke" (click)="navigateMoods()"><a style="color: #FF7B35;">Mood Tracker <img src="assets/img/arrow.png" alt="" /></a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <!-- Featured -->
+        <div class="category" style="margin-top: 20px">
+            <div>
+                <h2>Featured</h2>
+            </div>
+            <carousel class="carousel-html-content" style="z-index: 0" #carouselUseCase="carousel"
+                [height]="featuredModules.height" [cellsToShow]="featuredModules.customOptions.items" [loop]="false"
+                [arrows]="false" (events)="gotoFeaturedModuleDetails($event)">
+                <div class="carousel-cell item" *ngFor="let module of featuredModules.modules; index as i">
+					<div class="prod-img">
+                        <img [src]="moduleImagePath + module.module.module_image" alt=""/>
+                        <i *ngIf="!module.canAllow" class="fa fa-lock lock-icon"></i>
+                    </div>
+					<div class="category-name"><a href="">{{ module.module.module_name }}</a></div>
+				</div>
+            </carousel>
+        </div>
+        <!-- End of Featured -->
+
+        <!-- MOST POPULAR TO MEDITATE -->
+        <div class="category" style="margin-top: 20px">
+            <div>
+                <h2>Popular To Meditate</h2>
+            </div>
+            <carousel class="carousel-html-content" style="z-index: 0" #carouselUseCase="carousel"
+                [height]="meditateModules.height" [cellsToShow]="meditateModules.customOptions.items" [loop]="false"
+                [arrows]="false" (events)="gotoMeditateDetails($event)">
+                <div class="carousel-cell item" *ngFor="let module of meditateModules.modules; index as i">
+                    <div class="prod-img">
+                        <img [src]="moduleImagePath + module.module.module_image" alt=""/>
+                        <i *ngIf="!module.canAllow" class="fa fa-lock lock-icon"></i>
+                    </div>
+					<div class="category-name"><a href="">{{ module.module.module_name }}</a></div>
+				</div>
+            </carousel>
+        </div>
+        <!-- End of MOST POPULAR TO MEDITATE -->
+
+        <!-- MOST POPULAR TO RELAX -->
+        <div class="category" style="margin-top: 20px">
+            <div>
+                <h2>Popular To Relax</h2>
+            </div>
+            <carousel class="carousel-html-content" style="z-index: 0" #carouselUseCase="carousel"
+                [height]="relaxMusicModules.height" [cellsToShow]="relaxMusicModules.customOptions.items" [loop]="false"
+                [arrows]="false" (events)="gotoRelaxDetails($event)">
+                <div class="carousel-cell item" *ngFor="let module of relaxMusicModules.modules; index as i">
+                    <div class="prod-img">
+                        <img [src]="moduleImagePath + module.module.module_image" alt=""/>
+                        <i *ngIf="!module.canAllow" class="fa fa-lock lock-icon"></i>
+                    </div>
+					<div class="category-name"><a href="">{{ module.module.module_name }}</a></div>
+				</div>
+            </carousel>
+        </div>
+        <!-- End of MOST POPULAR TO RELAX -->
+
+        <!-- MOST POPULAR TO LEARN -->
+        <div class="category" style="margin-top: 20px">
+            <div>
+                <h2>Popular To Learn</h2>
+            </div>
+            <carousel class="carousel-html-content" style="z-index: 0" #carouselUseCase="carousel"
+                [height]="popularCourses.height" [cellsToShow]="popularCourses.customOptions.items" [loop]="false"
+                [arrows]="false" (events)="gotoPopulatLearnCourseDetails($event)">
+                <div class="carousel-cell item" *ngFor="let category of popularCourses.categories; index as i">
+                    <div class="prod-img"><img [src]="moduleImagePath + category.media_value" alt=""/></div>
+					<div class="category-name"><a href="">{{ category.name }}</a></div>
+				</div>
+            </carousel>
+        </div>
+        <!-- End of MOST POPULAR TO LEARN -->
+
+        <!-- POPULAR BLOGS -->
+        <div class="category" style="margin-top: 20px">
+            <div>
+                <h2>Popular Blogs</h2>
+            </div>
+            <carousel class="carousel-html-content" style="z-index: 0" #carouselUseCase="carousel"
+                [height]="popularBlogs.height" [cellsToShow]="popularBlogs.customOptions.items" [loop]="false"
+                [arrows]="false" (events)="gotoPopularBlogDetails($event)">
+                <div class="carousel-cell item" *ngFor="let blog of popularBlogs.blogs; index as i">
+                    <div class="prod-img" *ngIf="blog.media_type === 'text' || blog.media_type === 'image'">
+                        <img [src]="blogImagesPath + blog.media_file" alt=""/>
+                    </div>
+                    <div class="prod-img" *ngIf="blog.media_type === 'video'">
+                        <video [src]="blogImagesPath + blog.media_file" alt=""></video>
+                    </div>
+					<div class="category-name"><a href="">{{ blog?.title }}</a></div>
+                </div>
+            </carousel>
+        </div>
+        <!-- End of POPULAR BLOGS -->
+    </div>
+</div>

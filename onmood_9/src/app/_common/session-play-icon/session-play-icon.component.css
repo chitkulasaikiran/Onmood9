@@ -1,0 +1,16 @@
+.session-play-new {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    background: #254e45;
+    width: 42px;
+    height: 42px;
+    border-radius: 50px;
+    padding-top: 12px;
+    font-size: 18px;
+    color: white;
+}
+
+.isDisabled {
+    background: #ccc;
+}

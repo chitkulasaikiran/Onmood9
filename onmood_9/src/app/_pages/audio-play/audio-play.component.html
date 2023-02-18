@@ -1,0 +1,158 @@
+<div class="modal-content-audio">
+    <span class="close" (click)="closeAudio()">X</span>
+    <div class="moduleTitle">{{moduleName}}</div>
+    <div class="sessionTitle">{{sessionName}}</div>
+    <div class="circle-block">
+        <div class="skipBackBlock">
+            <img (click)="moveAudio(1)"  src="assets/img/skipBack.png" alt="Cinque Terre">
+        </div>
+        <div class="img_container" *ngIf="isAudioReady">
+            <round-progress
+                [current]="current"
+                [max]="max"
+                [color]="'#ef6603'"
+                [background]="'#eaeaea'"
+                [radius]="60"
+                [stroke]="15"
+                [semicircle]="false"
+                [rounded]="false"
+                [clockwise]="true"
+                [responsive]="false"
+                [duration]="800"
+                [animation]="'easeInOutQuart'"
+                [animationDelay]="0"
+                ></round-progress>
+            <div (click)="startPlaying()" *ngIf="!isAudioPlaying">
+                <i class="fa fa-play"></i>
+            </div>
+            <div (click)="startPlaying()" *ngIf="isAudioPlaying">
+                <i class="fa fa-pause" style="margin-left: -5px;"></i>
+            </div>
+        </div>
+        <div class="skipAheadBlock">
+            <img (click)="moveAudio(0)" src="assets/img/skipForward.png" alt="Cinque Terre">
+        </div>
+    </div>
+
+    <div style="font-size: 14px; text-align: center; color: #FFFFFF; margin:auto;align-items: center;">
+        {{currentTimer}}
+    </div>
+
+    <div style="margin-top: 20px; text-align: center; border-radius: 10px;">
+        <div style="display: inline-grid">
+            <span *ngFor="let file of files; index as i" (click)="setAudioSrc(file, 'true', i)" [ngClass]="file.isActive ? 'isFileSelected' : 'isFileNotSelected'">{{file.audio_file_name}}</span>
+        </div>
+        <!--<div class="dropdown">
+            <button style="font-size: 18px; width: 160px;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{selectedFile}}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" style="font-size: 18px; color: #FFFFFF; background-color: #3A8F87;" *ngFor="let file of files" (click)="setAudioSrc(file, 'true')">{{file.audio_file_name}}</a>
+            </div>
+        </div>-->
+    </div>
+
+    <div *ngIf="haveMusic === 'yes'">
+        <div *ngIf="backgroundMusicsFound" style="margin-top: 30px; text-align: center" (click)="showSettings(isMulti)">
+            <span style="border: 0px solid #254e45;
+            padding: 10px 30px 10px 30px;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-left:52px;
+            color: #FFFFFF;">{{backgroundMusics[selectedBgValue].file_name}}
+                <!--<span>
+                    <i class="fa fa-caret-down" style="font-size: 22px;"></i>
+                </span>
+                <span><i class="fa fa-sliders-h"  style="font-size: 22px;"></i></span>-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16" style=" margin-left: 25px; transform: rotate(
+                    90deg
+                    );">
+                    <path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/>
+                  </svg>
+            </span>
+        </div>
+    
+
+        <div style="margin: auto;
+        text-align: center;
+        color: #FFFFFF;
+        display:none;
+        padding-top: 10px">
+            <span style="font-size: 10px;">Ambient Music</span>
+            
+        </div>
+    </div>
+
+    <div style="margin-top: 20px; text-align: center">
+        <i class="fa fa-volume-up" style="font-size: 28px; color: #FFFFFF"></i>
+        <input #gMusic class="session_music" type="range" min="0" max="10" value="5" step="1" aria-valuemin="0.0" aria-valuemax="1.0" aria-valuenow="0.5"  (change)="changeSessionVolume(gMusic.value)">
+    </div>
+    <audio (ended)="audioEnded()" #sessionAudio [src]="audioSrc" controls [hidden]="true"></audio>
+    <audio #bgAudio controls [hidden]="true" loop></audio>
+
+    <div class="modal" id="myModal" [style.display]="showBgOptionModal ? 'block' : 'none'" style="z-index: 9999">
+        <div class="modal-dialog" style="margin: auto">
+            <div class="modal-content"> 
+
+                <!-- Modal Header -->
+                <div class="modal-body" *ngIf="isMulti === 'yes'" style="max-height: 333px;
+                overflow: auto; background-color: #50C2B8;">
+                    <!--<h6 class="modal-title" style="
+                    font-size: 22px;
+                    text-align: center;
+                    color: #254e45;">{{ title }}</h6>-->
+                    <div class="background-music" *ngFor="let option of backgroundMusics"
+                    [ngClass]="{'isSelected': option.is_selected}" (click)="onSelectBgOption(option)">
+                        <div class="music" [ngClass]="{'isSelected': option.is_selected}" style="
+                        font-size: 20px;
+                        text-align: center;">
+                            {{option.file_name}}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal body -->
+                <!-- <div class="modal-body">
+                    
+                </div> -->
+
+                <!-- Modal footer -->
+                <div class="modal-footer" style="padding: 30px; background-color: #50C2B8;">
+                    <label for="fader"  style="width: 100%; text-align:center">
+                            Use headphones to experience 3D music                                
+                        </label>
+                        <div style="width: 100%">
+                            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-volume-mute-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zm7.137 2.096a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708l4-4a.5.5 0 0 1 .708 0z"/>
+                                <path fill-rule="evenodd" d="M9.146 5.646a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0z"/>
+                            </svg>
+                        <!-- <i class="fa fa-volume-mute" style="font-size: 28px; color: #254e45"></i> -->
+                        <input #bgMusic style="width: 70%; margin: 10px;" type="range" id="fader" min="0" max="10" value="5" step="1" aria-valuemin="0.0"
+                        aria-valuemax="1" aria-valuenow="0.5"  (change)="changeBgMusicVolume(bgMusic.value)">
+
+                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-volume-up-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
+                            <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
+                            <path d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707z"/>
+                            <path fill-rule="evenodd" d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"/>
+                            </svg>
+
+                        <!-- <i class="fa fa-volume-up" style="font-size: 28px; color: 254e45"></i> -->
+                    </div>
+                    <div style="margin: auto;
+                        text-align: center;
+                        width: 100%;
+                        padding-top: 10px">
+                        <span style="font-size: 10px;">Ambient Music Volume</span>
+                    </div>
+                    <div style="margin: auto; padding-top: 10px">
+                        <button type="button"  class="btn btn-secondary " 
+                            style="background-color: #254e45;" data-dismiss="modal"
+                            (click)="showSettings(isMulti)">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

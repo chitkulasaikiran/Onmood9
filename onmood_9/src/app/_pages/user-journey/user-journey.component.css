@@ -1,0 +1,16 @@
+.activeBtn{
+    background-color:  #1d4844;
+    color: white !important;
+}
+.options-btn{
+    border:  #1d4844 solid 3px;
+    color: #1d4844;
+    border-radius:'6px' !important;
+    font-weight: bold;
+}
+.session-btn{
+    border:  #1d4844 solid 2px;
+    color: #1d4844;
+    border-radius:'6px' !important;
+    font-weight: bold;
+}

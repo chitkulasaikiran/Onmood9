@@ -1,0 +1,261 @@
+<div style="margin-top: 70px; min-height: 350px;">
+    <div class="row justify-content-center" *ngIf="addFeelingIndex != 3">
+        <div class="card w-75 main-card">
+            <div class="card-body" *ngIf="addFeelingIndex === -1">
+                <div class="row justify-content-center">
+                    <label class="main-heading">ADD FEELINGS</label>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="card w-75 sub-card">
+                        <div class="card-body">
+                            <div class="row justify-content-center">
+                                <label class="sub-heading">How are you feeling now?</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <small style="color: #254E45;">(To capture your feelings correctly, please follow below
+                                    instructions)</small>
+                            </div>
+                            <div class="row pl-4">
+                                <label style="color: #254E45;">
+                                    - Close your eyes and try to identify the dominant feelings in your mind at this
+                                    moment
+                                </label>
+                            </div>
+                            <div class="row pl-4">
+                                <label style="color: #254E45;">
+                                    - Mark it below, if it is pleasant or unpleasent
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center pt-5">
+                    <div class="col-lg-6 cl-md-6 col-sm-12 col-xs-12 text-center">
+                    <button type="button" class="btn btn-lg pleasent-btn" style="width: 180px;"
+                        (click)="addFeelingIndex = 1;isPleasent = true">Pleasent</button>
+                    </div>
+                    <div class="col-lg-6 cl-md-6 col-sm-12 col-xs-12 text-center pt-2">
+                    <button type="button" class="btn  btn-lg unpleasent-btn" style="width: 180px;"
+                        (click)="addFeelingIndex = 0;isPleasent = false">UnPleasent</button>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="card-body" *ngIf="addFeelingIndex != -1">
+                <div class="row justify-content-center">
+                    <label class="main-heading">{{moodsTypes[addFeelingIndex]}}</label>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="card w-100 mb-4 sub-card">
+                        <div class="card-body">
+                            <div class="row justify-content-center">
+                                <label class="sub-heading" style="font-size: 18px;">Try to identify the dominant emotion
+                                    at this moment in your feelings</label>
+                            </div>
+                            <div class="row pl-4 justify-content-center">
+                                <label style="color: #254E45;">
+                                    Mark the emotion in the four group below
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pt-4"
+                            *ngFor="let item of pleasentUnpleasentData[addFeelingIndex] | slice : 0: 2; index as i">
+                            <div class="card  w-100  {{item.name}}-card">
+                                <div class="card-header">
+                                    <div class="row justify-content-center">
+                                        {{item.title}}
+                                    </div>
+                                </div>
+                                <div class="card-body sub-card">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <ul>
+                                                <li *ngFor="let subTitle of item.subTitles" class="small">
+                                                    {{subTitle}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="row">
+                                                <img src="{{item.image}}" class="ml-5" width="50" height="50" />
+                                            </div>
+                                            <div class="row justify-content-end mt-4 pr-3">
+                                                <input class="form-check-input" type="checkbox" [value]="item.code"
+                                                    (change)="pleasentUnPleasentCheck($event)"
+                                                    [checked]="pleasentUnPleasentValue === item.code"
+                                                    id="pl-upl-CheckChecked">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pt-4"
+                            *ngFor="let item of pleasentUnpleasentData[addFeelingIndex] | slice : 2: 4;index as j">
+                            <div class="card w-75 {{item.name}}-card">
+                                <div class="card-header">
+                                    <div class="row justify-content-center">
+                                        {{item.title}}
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <ul>
+                                                <li *ngFor="let subTitle of item.subTitles" class="small">
+                                                    {{subTitle}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="row">
+                                                <img src="{{item.image}}" class="ml-5" width="50" height="50" />
+                                            </div>
+                                            <div class="row justify-content-end mt-4 pr-3">
+                                                <input class="form-check-input" type="checkbox" [value]="item.code"
+                                                    (change)="pleasentUnPleasentCheck($event)"
+                                                    [checked]="pleasentUnPleasentValue === item.code"
+                                                    id="flexCheckChecked">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row justify-content-end pr-5 pt-5">
+                    <button class="btn ml-2 nxtBtn" (click)="addFeelingIndex = 3"
+                        [disabled]="pleasentUnPleasentValue == ''">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center" *ngIf="addFeelingIndex == 3">
+        <div class="card w-75 thoughts-card">
+            <div class="card-body">
+                <div class="row justify-content-center">
+                    <label class="main-heading">ADD TYPE OF THOUGHTS</label>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="card w-75 mb-4 sub-card">
+                        <div class="card-body">
+                            <div class="row justify-content-center">
+                                <label class="sub-heading" style="font-size: 14px;">
+                                    Try to identify the dominant thought in your mind at this moment which leading to
+                                    this feeling of <span style="color: red;"> {{setSelecteValue()}} </span> , And
+                                    select the group of thoughts below which is matching closest tothe dominant thought
+                                    in your mind</label>
+                            </div>
+                            <!-- <div class="row pl-4 justify-content-center">
+                                <label style="color: #254E45;" class="small">
+                                    And mark the type of thought from these group below -------- Reference video link
+                                </label>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="card w-75 mb-4 sub-thougt-card pb-3">
+                        <div class="card-body">
+                            <div class="row">
+
+                                <label>
+                                    Thoughts is related to - I, Me & Myself example -
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 pb-2" style="display: inherit;" *ngFor="let item of myThoughtsIcons">
+                                    <span class="fa-stack fa-lg fa-md fa-sm fa-xs">
+                                        <i class="fa fa-circle fa-stack-2x " style="color: white;"></i>
+                                        <i class="{{item.icon}} fa-stack-1x text-dark"></i>
+                                    </span>
+                                    <small class="pt-2" style="font-weight: lighter;"> {{item.label}}</small>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-end mt-4 pr-3">
+                                <input class="form-check-input" type="checkbox" value="T1"
+                                    (change)="thoughtsCheck($event)" [checked]="thoughtsValue === 'T1'"
+                                    id="flexCheckChecked">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="card w-75 mb-4 sub-thougt-card pb-3">
+                        <div class="card-body">
+                            <div class="row">
+
+                                <label>
+                                    Thought is related to Family, Friends & Colleagues example -
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 pb-2" style="
+                                display: inherit;
+                            " *ngFor="let item of familyThoughtsIcons">
+                                    <span class="fa-stack fa-lg fa-md fa-sm fa-xs">
+                                        <i class="fa fa-circle fa-stack-2x " style="color: white;"></i>
+                                        <i class="{{item.icon}} fa-stack-1x text-dark"></i>
+                                    </span>
+                                    <small class="pt-2" style="font-weight: lighter;"> {{item.label}}</small>
+                                </div>
+                            </div>
+                            <div class="row justify-content-end mt-4 pr-3">
+                                <input class="form-check-input" type="checkbox" value="T2"
+                                    (change)="thoughtsCheck($event)" [checked]="thoughtsValue === 'T2'"
+                                    id="friendsCheckChecked">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="card w-75 mb-4 sub-thougt-card pb-3">
+                        <div class="card-body">
+                            <div class="row">
+
+                                <label>
+                                    Thoughts is related to Community, Society and Others example -
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 pb-2" style="
+                                display: inherit;
+                            " *ngFor="let item of publicThoughtsIcons">
+                                    <span class="fa-stack fa-lg fa-md fa-sm fa-xs">
+                                        <i class="fa fa-circle fa-stack-2x " style="color: white;"></i>
+                                        <i class="{{item.icon}} fa-stack-1x text-dark"></i>
+                                    </span>
+                                    <small class="pt-2" style="font-weight: lighter;"> {{item.label}}</small>
+                                </div>
+                            </div>
+                            <div class="row justify-content-end mt-4 pr-3">
+                                <input class="form-check-input" type="checkbox" value="T3" id="flexCheckChecked"
+                                    (change)="thoughtsCheck($event)" [checked]="thoughtsValue === 'T3'">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-end pr-5 pt-5">
+                    <button class="btn ml-2 nxtBtn" (click)="save()" [disabled]="thoughtsValue == ''">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

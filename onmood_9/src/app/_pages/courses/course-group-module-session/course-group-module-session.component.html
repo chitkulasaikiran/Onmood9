@@ -1,0 +1,88 @@
+<div class="main-wrapper">
+    <div class="container">
+        
+        <!-- Module name -->
+        <div *ngIf="isSelectedGroupModuleAvailable" class="d-flex justify-content-between align-items-center modul-head">
+            <div (click)="goBack()"><img src="assets/img/wht-arrow.png" /></div>
+            <div><span class="module-name">{{selectedGroupModule && selectedGroupModule.module_name}}</span></div>
+            <div><img src="assets/img/Icon awesome-heart.png" /></div>
+        </div>
+
+        <!-- Voice buttons -->
+        <div class="text-center mt-4" *ngIf="isVoicesAvailable">
+            <button type="button" *ngFor="let btn of voiceOtionButtons" class="gender-btn" [ngClass]="{'active': btn.isActive, 'gender-btn-no-display': !btn.canDisplay}" (click)="changeVoiceOption(btn.value)">{{btn.title}}</button>
+        </div>
+
+        <!-- Sessions list -->
+        <div class="sessions mt-5">
+            <h5>Sessions</h5>
+            <div class="row d-flex justify-content-beetween">
+                <div class="col-md-6" *ngFor="let sess of moduleSessions; let i = index;">
+                    <div class="session-list"  (click)="fetchSessionFiles(i, sess.id, sess.session_name, sess.canPlay, sess.status)">
+                        <app-session-play-icon 
+                            [sessionStatus]="sess.status" 
+                            [sessionCanPlay]="sess.canPlay"></app-session-play-icon>
+                        <span>{{sess.session_name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Relative videos -->
+        <div class="category" style="margin-top: 20px"  *ngIf="moduleVideos.length > 0">
+            <div>
+                <h2>Relavant Videos</h2>
+            </div>
+            <carousel class="carousel-html-content" style="z-index: 0" #carouselUseCase="carousel"
+                [height]="videoCarosalHeight" [cellsToShow]="videoCarosalItems" [loop]="false"
+                [arrows]="false">
+                <div class="carousel-cell item" *ngFor="let video of moduleVideos; index as i">
+					<div class="prod-img" (click)="playRelavantVideo(video.audio_video_file)">
+                        <div class="play-icon" (click)="playRelavantVideo(video.audio_video_file)">
+                            <i class="fa fa-play-circle"></i>
+                        </div>
+                        <Video *ngIf="video.isVideoThumbAvailable" style="border-radius: 10px;" [poster]="moduleImagePath + video.video_thumb_image" [src]="videosPath+video.audio_video_file"></Video>
+
+                        <Video *ngIf="!video.isVideoThumbAvailable" style="border-radius: 10px;" [src]="videosPath+video.audio_video_file"></Video>
+                    </div>
+					<div class="category-name"><a href="">{{ video.file_name }}</a></div>
+				</div>
+            </carousel>
+        </div>
+        <!-- Image and description -->
+        <div class="video-desc">
+            <div class="video-lr" *ngIf="selectedGroupModule && selectedGroupModule.topicImageName"><img  [src]="moduleImagePath + selectedGroupModule.topicImageName" /></div>
+            <div *ngIf="selectedGroupModule && selectedGroupModule.long_description">
+                <p [innerHTML]= "selectedGroupModule && selectedGroupModule.long_description | safeHtml">
+                    
+                </p>
+            </div>
+        </div>
+        <div *ngIf="showAudioPopup" id="popupModal" class="popupAudioClass">
+            <app-audio-play (showSessionPlay)="handlePopup($event)" 
+            (isSessionCompleted)="getUserPlayedSessions()"
+            [indexValue]="selectedIndex" 
+            [audioSrc]="selectedAudioSource"
+            [groupId] = "groupId"
+            [courseId]="courseId"
+            [moduleId]="moduleId"
+            [moduleName]="selectedGroupModule.module_name"
+            [haveMusic]="selectedGroupModule.have_music"
+            [defaultMusicId]="selectedGroupModule.default_music_id"
+            [isMulti]="selectedGroupModule.is_multi"        
+            [sessionId]="selectedSessionId"
+            [sessionName]="selectedSession"
+            [isSessionPlayed]="isSessionPlayed"
+            [selectedVoiceOption]="selectedVoiceOption"
+            ></app-audio-play>
+        </div>
+    </div>    
+</div>
+<div class="videoDiv" #videoDiv>
+    <span class="closeVideoIcon" #closeVideoIcon (click)="closeRelavantVideo()">X</span>
+    <video controls id="video1" #video1
+    style="width: 100%; height: 0; margin:0 auto;">
+        <source src="{{relavantVideoUrl}}" type="video/mp4">
+        Your browser doesn't support HTML5 video tag.
+    </video>
+</div>

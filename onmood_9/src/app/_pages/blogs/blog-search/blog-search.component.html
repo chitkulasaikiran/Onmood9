@@ -1,0 +1,62 @@
+<div class="blog">
+    <div class="sidebar" data-aos="fade-left">
+        <h3 class="sidebar-title">Search</h3>
+        <div class="sidebar-item search-form">
+            <form [formGroup]="searchForm" (ngSubmit)="doSearch()">
+                <input type="text" formControlName="keyword">
+                <button type="submit"><i style="color:white" class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <div class="sidebar-item categories">
+            <h3 class="sidebar-title">Type of Blogs</h3>
+            <ul>
+                <li><a routerLink="/blog/category/all">All<span>({{totalBlogCount}})</span></a></li>
+                <li><a routerLink="/blog/category/video">Podcasts<span>({{videoBlogCount}})</span></a></li>
+                <li><a routerLink="/blog/category/textual">Blogs<span>({{textualBlogCount}})</span></a></li>
+            </ul>
+        </div>
+        <h3 class="sidebar-title">Categories</h3>
+        <div class="sidebar-item categories">
+            <ul>
+                <li *ngFor="let cat of blogCategoryList">
+                    <a routerLink="/blog/category/{{cat.id}}">{{cat.name}}</a>
+                </li>
+            </ul>
+
+        </div><!-- End sidebar categories-->
+
+        
+        <h3 class="sidebar-title">Most Viewed Post <span>({{totalBlogCount}})</span></h3>
+        <div class="sidebar-item recent-posts post" *ngFor="let i of blogList;">
+            <div class="post-item clearfix">
+                <!--<img [src]="blogImagesPath+i.media_file" alt="">-->
+                <div *ngIf="i.media_type === 'image'  || i.media_type === 'text'" style="overflow: hidden; max-height: 50;
+                float: left;">
+                    <!-- <img [src]="testImage" alt="" class="img-fluid"> -->
+                    <img [src]="blogImagesPath+i.media_file" alt="">
+                </div>
+                <div class="entry-img" *ngIf="i.media_type === 'video'">
+                    <i class="fa fa-play" style="position: absolute;
+                    color: #FFF;
+                    left: 20%; padding-top: 12px"></i>
+                    <video [src]="blogImagesPath+i.media_file"></video>
+                </div>
+                <h4 class="blog-title">
+                    <a routerLink="/blog/blog-detail/{{i.id}}">{{i.title}}</a>
+                    <!--<a style="cursor:pointer" routerLink="/blog-detail/{{i.id}}">{{i.title}}</a>-->
+                </h4>
+                <time datetime="2020-01-01">{{i.publish_date | date: 'dd-MMM-yyyy'}}</time>
+            </div>
+            <div class="or-seperator"></div>
+        </div>
+        <h3 class="sidebar-title" *ngIf="!isBlogDetail">Tags</h3>
+        <div class="sidebar-item tags"  *ngIf="!isBlogDetail">
+            <ul>
+                <li *ngFor="let tag of allTags">
+                    <a style="cursor: pointer" [ngClass]="tag.isSelected ? 'tagSelected' : '' " (click)="filterTags(tag)">{{tag.tagName}}</a>
+                </li>
+            </ul>
+
+        </div><!-- End sidebar tags-->
+    </div>
+</div>

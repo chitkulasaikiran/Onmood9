@@ -1,0 +1,95 @@
+.main-card{
+    background-color: #AFEBDE;
+    border-radius:20px;
+}
+.main-heading{
+    color: #373131;
+    font-size: 32px;
+    font-family: 'Montserrat';
+    font-weight: bold;
+}
+.sub-heading{
+    color: #254E45;;
+    font-size: 24px;
+    font-weight: bold;
+}
+.nxtBtn{
+    background: #254E45 0% 0% no-repeat padding-box;
+    box-shadow: 3px 3px 6px #00000029;
+    border-radius: 150px;
+    opacity: 1;
+    width: 90px;
+    height: 35px;
+    border-radius: 150px;
+    color: #FFFFFF;
+
+}
+.anger-card{
+    background-color: #FE0000;
+    border-radius: 8px;
+}
+.fear-card{
+    background-color: #696969;
+    border-radius: 8px;
+}
+.disgusted-card{
+    background-color: #1E90FF;
+    border-radius: 8px;
+}
+.sad-card{
+    background-color: #D3D3D3;
+    border-radius: 8px;
+}
+
+.joy-card{
+    background-color: #FEFAEF;
+    border-radius: 8px;
+}
+.love-card{
+    background-color: #90EE90;
+    border-radius: 8px;
+}
+.courage-card{
+    background-color: #FEA500;
+    border-radius: 8px;
+}
+.wonder-card{
+    background-color: #FFFF01;
+    border-radius: 8px;
+}
+
+.thoughts-card{
+    background-color: white;
+    border-radius:20px;
+}
+.thoughts-heading{
+    color: #373131;
+    font-size: 28px;
+    font-family: 'Montserrat';
+    font-weight: bold;
+}
+.sub-card{
+    border-radius: 15px;
+}
+.sub-thougt-card{
+    background-color: #254E45;
+    border-radius: 10px;
+color: white;
+font-weight: lighter;
+
+}
+
+.pleasent-btn{
+    height: 75px;
+    border-radius: 15px;
+    background-color: #6E9AFF;
+}
+.unpleasent-btn{
+    height: 75px;
+    border-radius: 15px;
+    background-color: #FF5E5E;
+}
+input.form-check-input {
+    width: 20px !important;
+    height: 20px !important;
+}

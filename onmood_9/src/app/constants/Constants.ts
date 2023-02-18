@@ -1,0 +1,12 @@
+export const CURRENT_USER = "CURRENT_USER";
+export const UNAME = "UNAME";
+export const TOKEN = "TOKEN";
+export const IS_LOGGEDIN = "IS_LOGGEDIN";
+export const ACTIVE_BLOGS = "ACTIVE_BLOGS";
+export const SELECTED_BLOG = "SELECTED_BLOG";
+export const USER_TYPE = "USER_TYPE";
+export const CUNIQUE_ID = "CUNIQUE_ID";
+export const CORP = "CORP";
+export const INDI = "INDI";
+export const CURRENT_SUBSCRIPTION = "CURRENT_SUBSCRIPTION";
+export const SESSION_EXPIRES_ON = "SESSION_EXPIRES_ON";

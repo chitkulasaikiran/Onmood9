@@ -1,0 +1,6 @@
+<div class="text-center">
+    <button type="button" routerLink="{{learnTab.link}}" class="lrg-btn" [ngClass]="learnTab.isActive ? 'active' : ''"
+        *ngFor="let learnTab of learnTabs; index as i">
+        {{ learnTab.name }}
+    </button>
+</div>

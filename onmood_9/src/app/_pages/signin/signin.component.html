@@ -1,0 +1,83 @@
+<div class="section">
+	<div class="container">
+		<div class="row full-height justify-content-center">
+			<div class="col-12 text-center align-self-center py-5">
+				<div class="section pb-5 pt-5 pt-sm-2 text-center">
+					<h6 class="mb-0 pb-3"><span>Sign In </span><span>Sign Up</span></h6>
+					  <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+					  <label for="reg-log"></label>
+					<div class="card-3d-wrap mx-auto">
+						<div class="card-3d-wrapper">
+							<div class="card-front">
+								<div class="center-wrap">
+									<div class="section text-center">
+										<form class="signin-form" [formGroup]="loginForm">
+											<h4 class="mb-4 pb-3">Sign In</h4>
+											<div class="form-group">
+												<input type="email" formControlName="username" class="form-style" placeholder="Your Email"  autocomplete="off">
+												<i class="input-icon uil uil-at"></i>
+											</div>	
+											<div class="form-group mt-2">
+												<input type="password" formControlName="password" class="form-style" placeholder="Your Password"  autocomplete="off">
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<div *ngIf="isErrorOccured" style="color: red; text-align: center">
+												{{errorMessage}}
+											</div>
+											<a (click)="doOnmoodLogin()"  class="btn mt-4">submit</a>
+											<p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
+										</form>
+									</div>
+									<div class="text-center mt-2 mb-4"><img src="assets/img/or.png" alt="" /></div>
+									<div class="text-center signinwith mb-4">Sign in with Social Media</div>
+									<div class="signsocial-icon">
+										<i #loginRef class="fab fa-google"></i> 
+										<!-- <i class="fab fa-facebook-f"></i> -->
+									</div>
+								  </div>
+							  </div>
+							<div class="card-back">
+								<div class="center-wrap">
+									<div class="section text-center">
+										<form class="signin-form" [formGroup]="signupForm">
+											<h4 class="mb-4 pb-3">Sign Up</h4>
+											<div *ngIf="isErrorOccured" style="color: red; text-align: center">
+												{{errorMessage}}
+											</div>
+											
+											<div class="form-group">
+												<input type="text" class="form-style" placeholder="Your Full Name" formControlName="fName" autocomplete="off">
+												<i class="input-icon uil uil-user"></i>
+											</div>	
+											<div class="form-group mt-2">
+												<input type="email" formControlName="email" class="form-style" placeholder="Your Email"  autocomplete="off">
+												<i class="input-icon uil uil-at"></i>
+											</div>	
+											<div class="form-group mt-2">
+												<input type="password" formControlName="password" class="form-style" placeholder="Your Password" autocomplete="off">
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<div class="form-group mt-2">
+												<input type="password" formControlName="confirmPassword" class="form-style" placeholder="Retype Password" autocomplete="off">
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<div class="hinttxt" style="color: #fff; padding-top:10px">By continuing, you agree to Onmood9's <a href="https://onmood9.com/#/terms" target="_blank">Terms & Conditions</a> and <a href="https://onmood9.com/#/privacy" target="_blank">Privacy Policy</a></div>
+											<a (click)="signup()" class="btn mt-4">submit</a>
+										</form>
+									</div>
+									<div class="text-center mt-2 mb-4"><img src="assets/img/or.png" alt="" /></div>
+									<div class="text-center signinwith mb-4">Sign up with Social Media</div>
+									<div class="signsocial-icon">
+										<i #loginRef2 class="fab fa-google"></i> 
+										<i (click)="doFacebookLogin()" class="fab fa-facebook-f"></i>
+										<!-- <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
+									</div>
+								  </div>
+							  </div>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+		  </div>
+	</div>
+</div>

@@ -1,0 +1,57 @@
+<div class="main-wrapper">
+    <!-- <section id="breadcrumbs" class="breadcrumbs"> -->
+      <div class="container text-center" style="margin-top: 45px;">
+        <!-- <div class="d-flex justify-content-between align-items-center">
+          <h2><strong>Blog</strong></h2>
+        </div> -->
+        <!-- <div class="d-flex justify-content-between align-items-center mt-5 modul-head"> -->
+            <!-- <div   style="opacity: 0;"><img src="assets/img/wht-arrow.png" /></div> -->
+            <div><span class="module-name">Blog</span></div>
+            <!-- <div>&nbsp;</div> -->
+        <!-- </div> -->
+      </div>
+    <!-- </section> -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 entries">
+                    <div class="entry" data-aos="fade-up" *ngFor = "let blog of blogList | paginate: { itemsPerPage: 5, currentPage: pageNumber, totalItems: totalBlogCount }">
+                        <div routerLink="/blog/blog-detail/{{blog.id}}" class="entry-img" *ngIf="blog.media_type === 'image' || blog.media_type === 'text'">
+                            <img [src]="blogImagesPath+blog.media_file" alt="" class="img-fluid">
+                        </div>
+                        <div  class="entry-img" *ngIf="blog.media_type === 'video'">
+                            <a routerLink="/blog/blog-detail/{{blog.id}}">
+                                <i class="fab fa-play playIcon"></i>
+                            </a>
+                            <video style="width: 100%;" [src]="blogImagesPath+blog.media_file"></video>
+                        </div>
+                        <h2 class="entry-title">
+                            <a routerLink="/blog/blog-detail/{{blog.id}}">{{blog.title}}</a>
+                        </h2>
+                        <div class="entry-meta">
+                            <ul>
+                                <li *ngIf="blog.author" class="d-flex align-items-center">
+                                    <i class="fa fa-user"></i>
+                                    <a>{{blog.author}}</a>
+                                </li>
+                                <li *ngIf="blog.publish_date != '0000-00-00'" class="d-flex align-items-center">
+                                    <i class="fas fa-clock" aria-hidden="true"></i>
+                                    <time datetime="2020-01-01">{{blog.publish_date | date: 'dd-MMM-yyyy'}}</time>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="entry-content">
+                            <p>{{blog.descr | slice: 0: 150}}...</p>
+                            <div class="read-more"><a routerLink="/blog/blog-detail/{{blog.id}}">Read More</a></div>
+                        </div>
+                        
+                    </div>
+                    <pagination-controls [maxSize]="maxSize" (pageChange)="changePage($event)"></pagination-controls>
+                </div>
+                <div class="col-lg-4">
+                    <app-blog-search [isBlogDetail]="false"></app-blog-search>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

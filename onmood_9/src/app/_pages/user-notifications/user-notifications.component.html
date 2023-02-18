@@ -1,0 +1,32 @@
+<div class="main-wrapper " [style.min-height]="deviceHeight +'px'">
+	<div class="container">
+        <div class="notification-box">
+            <div class="notification-head">NOTIFICATIONS</div>
+            <div class="p-5" *ngFor="let notification of notifications">
+                <div class="pt-2 pb-2">
+                    <div class="notification-list">
+						<div class=" d-flex justify-content-between">
+                            <div>
+                                <h5 class="mb-0">{{notification?.title}}</h5>
+                                <!-- <p>Subject of the notification</p> -->
+                            </div>
+                            <div>
+                                <div class="notifi-time">
+                                    <img src="assets/img/clock1.png" />   
+                                    <time datetime="2020-01-01">{{notification?.created_date | date: 'dd-MMM-yyyy @ hh:mm:ss'}}</time>
+                                </div>
+                                <div class="mt-2 text-right" data-toggle="collapse" [attr.href]="'#collapse'+notification.id" role="button" aria-expanded="true" [attr.aria-controls]="'collapse'+notification.id"><img src="assets/img/check.png"/></div>
+                                
+                            </div>
+                        </div>
+					    <div class="collapse"  [attr.id]="'collapse'+notification?.id" >
+                            <div class="card card-body">
+                                {{notification?.message}}
+                            </div>
+                        </div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

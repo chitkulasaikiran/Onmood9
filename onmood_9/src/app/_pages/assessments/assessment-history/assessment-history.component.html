@@ -1,0 +1,77 @@
+<div class="container" style="margin-top: 70px;">
+    <div class="container">
+        <ng-container *ngIf="!resultSelected">
+            <div class="row justify-content-center">
+                <h2>{{assessmentService?.selectedTest?.title}}</h2>
+            </div>
+            <div class="card" style="border-radius:20px">
+                <div class="card-header text-light"
+                    style="background-color: '#254e45';border-top-right-radius:20px;border-top-left-radius:20px">
+                    <div class="row">
+                        <div class="col-10 text-center">
+                            History
+                        </div>
+                        <div class="col-2 text-light text-right pr-3" style="cursor: pointer;" (click)="backClick()">
+                            Back
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="max-height: 300px; overflow: scroll;">
+                    <!-- <p>{{que.title}}</p> -->
+                    <div class="row justify-content-center mt-5" *ngIf="isLoading">
+                        <h5 class="text-center text-muted">Assessment History Loading...</h5>
+                      </div>
+                    <span class="row" *ngIf="history.length > 0">
+                        <div class="row ml-5" style="width: 80%;">
+                            <div class="col-4">S.No</div>
+                            <div class="col-4">Date</div>
+                            <div class="col-4">Score</div>
+                        </div>
+                    </span>
+                    <span *ngFor="let item of history; index as i" class="row">
+                        <div style="border: 1px solid #254e45; border-radius: 7px; width: 80%;" class="mb-2 ml-5">
+                            <!-- <p>{{opt.opt}}</p> -->
+                            <div class="row">
+                                <div class="col-4 pl-5">{{i+1}}</div>
+                                <div class="col-4">{{item.finished_on | date:'dd/MM/yy'}}</div>
+                                <!-- <div class="col-4">{{item.finished_on}}</div> -->
+                                <div class="col-4">{{item.score}}/{{item.max_score}}</div>
+                            </div>
+                        </div>
+                        <button class="btn text-light btn-sm ml-2" (click)="resultSelect(item)"
+                            style="background: linear-gradient(180deg, #3a8f87 0%, #1d4844 100%);
+                            background-color: transparent;border-radius:'50px'; width: 94px; height: 30px;">
+                            Result
+                        </button>
+                    </span>
+
+
+                </div>
+               
+            </div>
+            <div class="row justify-content-center pt-3">
+                <button class="btn text-light btn-sm ml-5" (click)="beginTest()"
+                    style="background: linear-gradient(180deg, #569155 0%, #2b492b 100%);
+                    background-color: transparent;border-radius:'100px'; width: 125px; height: 40px;">
+                    Take Test
+                </button>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="resultSelected">
+            <!-- <div class="card" style="border-radius:20px">
+                <div class="card-header text-light"
+                    style="background-color: '#254e45';border-top-right-radius:20px;border-top-left-radius:20px">
+                    <div class="row justify-content-center font-weight-bold">
+                            My Result
+                    </div>
+                </div>
+                <div class="card-body" style="max-height: 500px; overflow: scroll;">
+                    <app-assessment-result [testResult]="selectedResult" (viewHistoryBtnClick)="resultSelected = false"></app-assessment-result>
+                </div>
+
+            </div> -->
+            <app-assessment-result [testResult]="selectedResult" (viewHistoryBtnClick)="resultSelected = false"></app-assessment-result>
+        </ng-container>
+    </div>
+
+</div>

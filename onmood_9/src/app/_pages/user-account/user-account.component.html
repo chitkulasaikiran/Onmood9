@@ -1,0 +1,141 @@
+<div class="main-wrapper ">
+    <div class="container">
+        <div class="notification-box">
+            <div class="notification-head">MY PROFILE</div>
+            <div class="p-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="profilesect">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <h4>Personal Information</h4>
+                                    <p *ngIf="!isMessageEmpty">{{showMessage}}</p>
+                                </div>
+                                
+                                <div *ngIf="!isEditingPersonalInfo">
+                                    <img (click)="editPersonalInfo(true);" src="assets/img/edit.png" alt="">
+                                </div>
+                                <div *ngIf="isEditingPersonalInfo">
+                                    <span (click)="editPersonalInfo(false);" style="font-size: 20px;
+                                    font-weight: bold;">X</span>
+                                </div>
+                            </div>
+                            <form [formGroup]="personalInfoForm" (ngSubmit)="updatePersonalInfo()">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="fname">Full Name</label>
+                                            <input formControlName="fname" value="{{user.contact}}" type="text" class="form-control" id="fname">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="contact">Contact Number</label>
+                                            <input formControlName="contact" value="{{user.contact}}" type="text" class="form-control" id="contact"> </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="email">Email Id</label>
+                                            <input type="email" formControlName="email" value="{{user.email}}"  class="form-control" id="email"> </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button (click)="updatePersonalInfo()" *ngIf="isEditingPersonalInfo" type="button" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profilesect">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <h4>Account Information</h4></div>
+                                <div *ngIf="!isChangingPassword">
+                                    <img (click)="editPassword(true);" src="assets/img/edit.png" alt="">
+                                </div>
+                                <div *ngIf="isChangingPassword">
+                                    <span (click)="editPassword(false);" style="font-size: 20px;
+                                    font-weight: bold;">X</span>
+                                </div>
+                            </div>
+                            <form [formGroup]="passwordForm" (ngSubmit)="updatePasswordInfo()">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="cpwd">Account Type</label>
+                                            <input type="text" value="{{cpwd}}"
+                                             placeholder="Personal/Partner" formControlName="cpwd" class="form-control" id="cpwd"> </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="npwd">Linked Social Account</label>
+                                            <input type="text" value="" formControlName="npwd" placeholder=" Facebook, Google, Email" class="form-control" id="npwd"> </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="rtpwd"> Password</label>
+                                            <input type="password" value="" formControlName="rtpwd" placeholder="********"  class="form-control" id="rtpwd"> </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button *ngIf="isChangingPassword" type="submit" class="btn btn-primary">
+                                            Update Password
+                                        </button>
+                                        <p *ngIf="!isPasswordMessageEmpty">{{showPasswordMessage}}</p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+              
+                   
+                   <div class="container">
+                    <div class="notification-box">
+                        <div class="profilesect">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="text-center">
+                                <h4 style="color:#EF6603">Subscription Details</h4>
+                            </div>
+                            <div class="form-group">
+                                <label for=" ">Membership</label>
+                                <input type="text" class="form-control" id=" " placeholder=" Free/Premium"> </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for=" ">Subscription Type</label>
+                                <input type="text" class="form-control" id=" " placeholder="Free/Trial/Paid(Free is No subscription)"> </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for=" ">Subscription Name</label>
+                                <input type="text" class="form-control" id=" "> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for=" ">Start Date</label>
+                                <input type="text" class="form-control" id=" "> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for=" ">End Date</label>
+                                <input type="text" class="form-control" id=" "> </div>
+                        </div>
+
+    
+                            <!-- <div class="text-center mt-3 d-none"> -->
+                                <!-- <button type="button" class="btn btn-primary">UPDATE</button> -->
+                            <!-- </div> -->
+
+                    </div>
+                
+                
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </div>

@@ -1,0 +1,11 @@
+.isTabSelected {
+    background-color: #EF6603;
+    font-size: 12px;
+    padding: 6px;
+}
+
+.isTabNotSelected {
+    background-color: #254e45;
+    font-size: 12px;
+    padding: 6px;
+}

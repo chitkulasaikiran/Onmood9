@@ -1,0 +1,46 @@
+<!-- <p>assessment-result works!</p> -->
+<div class="container">
+    <div class="container">
+        <div class="row justify-content-center pb-4">
+            <h2 style="color:'#254e45' ;">{{testResult.title}}</h2>
+        </div>
+        <div class="row pl-5">
+            <label class="pl-5">Score</label>
+        </div>
+        <div class="row pl-5">
+            <div class="circle">
+                <div class="text-center font-weight">
+                    <label style="font-size: 55px;">{{testResult?.total_score}}</label>
+                </div>
+                <div class="text-center">
+                    <label>out of {{testResult?.max_score}}</label>
+                </div>
+                <!-- <p>
+                    <label class="p-3" style="font-size: 40px;">{{testResult?.total_score}}
+                    </label>
+                    <label class="pl-4">out of {{testResult?.max_score}}</label>
+                </p> -->
+            </div>
+            <div class="" style="background-color: transparent;">
+                <div *ngFor="let item of rulesInfo" class="mt-4 ml-5">
+                    <h3>{{item.remark}}</h3>
+                    <p style="white-space: pre-line;">{{item.description}}</p>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <button class="btn text-light font-weight-bold" style="
+        background: linear-gradient(180deg, #569155 0%, #2b492b 100%);
+        border-radius:'100px'; width: 180px; background-color: transparent; height: 47px;"
+            (click)="navigateToHistory()">
+            Assessments
+        </button>
+        <button class="btn text-light font-weight-bold ml-3" (click)="viewHistory()"
+        style="background: linear-gradient(180deg, #3a8f87 0%, #1d4844 100%);
+        background-color: transparent;border-radius:'100px'; width: 180px; height: 47px;">
+            View History
+        </button>
+    </div>
+</div>

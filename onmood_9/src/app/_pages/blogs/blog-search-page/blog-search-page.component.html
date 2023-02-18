@@ -1,0 +1,51 @@
+<div id="main">
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2><strong>Blog</strong></h2>
+        </div>
+      </div>
+    </section>
+    
+    <section id="blog" class="blog">
+        <div class="container">
+            <p>Showing results({{searchCount}}) of {{searchKeyword}}</p>
+            <div class="row">
+                <div class="col-lg-8 entries">
+                    <div class="entry" data-aos="fade-up" *ngFor = "let blog of blogList;">
+                        <!--<div class="entry-img"><img [src]="blogImagesPath+blog.media_file" alt="" class="img-fluid"></div>-->
+                        
+                        <div class="entry-img" *ngIf="blog.media_type === 'image'">
+                            <img [src]="blogImagesPath+blog.media_file" alt="" class="img-fluid">
+                        </div>
+                        <div class="entry-img" *ngIf="blog.media_type === 'video'">
+                            <video  style="width: 100%;" [src]="blogImagesPath + blog.media_file" controls></video>
+                        </div>
+                        <h2 class="entry-title">
+                            <!--<a href="javascript:;"  (click)="openBlog(blog.id)">{{blog.title}}</a>-->
+                            <a routerLink="/blog-detail/{{blog.id}}">{{blog.title}}</a>
+                        </h2>
+                        <div class="entry-meta">
+                            <ul>
+                                <li class="d-flex align-items-center">
+                                    <i class="fa fa-user"></i>
+                                    <a>{{blog.author}}</a>
+                                </li>
+                                <li class="d-flex align-items-center"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    <time datetime="2020-01-01">{{blog.publish_date | date: 'yyyy-MM-dd'}}</time>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="entry-content">
+                            <p>{{blog.descr | slice: 0: 150}}...</p>
+                            <div class="read-more"><a routerLink="/blog/blog-detail/{{blog.id}}">Read More</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <app-blog-search></app-blog-search>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

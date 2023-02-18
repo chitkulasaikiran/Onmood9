@@ -1,0 +1,113 @@
+.user-home {
+  	margin-top: 60px;
+}
+
+.carosal-header {
+	padding-top: 20px;
+	padding-bottom: 10px;
+	font-weight: bolder;
+	font-size: 16px;
+}
+.wrapper {
+	max-height: 120px;
+	border: 1px solid #ddd;
+	display: flex;
+	overflow-x: auto;
+}
+
+.wrapper .item{
+	width: 110px;
+	height: 110px;
+	line-height: 110px;
+	text-align: center;
+	background-color: #ddd;
+	margin-right: 2px;
+}
+
+figure {
+	width: fit-content;
+	margin: 0 auto;
+	/* background: #e2deed; */
+	/* padding: 1rem; */
+	border-radius: 5px;
+}
+
+figcaption {
+	margin-top: 0.5rem;
+}
+
+img {
+	/* display: block; */
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+body {
+	background: #fafafa;
+	line-height: 1.5;
+	font-family: "Arial";
+	padding: 4rem;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.pleasent-bar{
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+.unpleasent-bar{
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+.progress{
+	height: 50px;
+	/* width: 290px; */
+}
+.moreBtn{
+	background: #254E45 0% 0% no-repeat padding-box;
+	box-shadow: 3px 3px 6px #00000029;
+	border-radius: 150px;
+	opacity: 1;
+	width: 90px;
+	height: 35px;
+	border-radius: 150px;
+	color: #FFFFFF;
+}
+
+@media only screen and (max-width: 600px) {
+	.lock-icon {
+		position: absolute;
+		top: 8px;
+		font-size: 12px;
+		left: 8px;
+		color: #fff;
+	}
+	.progress{
+		height: 36px;
+		/* width: 290px; */
+	}
+	.no-entries {  
+		padding: 16px; 
+		font-size: 12px
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.lock-icon {
+		position: absolute;
+		top: 10px;
+		font-size: 20px;
+		left: 10px;
+		color: #fff;
+	}
+	.progress{
+		height: 50px;
+		/* width: 290px; */
+	}
+	.no-entries {
+		padding: 26px; 
+		font-size: 16px
+	}
+}

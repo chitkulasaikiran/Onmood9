@@ -1,0 +1,45 @@
+<div class="main-wrapper">
+    <div class="container">
+        <div class="notification-box" *ngIf="!resultSelected">
+            <div class="notification-head">HISTORY</div>
+            <div class="p-5">
+                <div class=" col-md-12 d-flex justify-content-center" *ngIf="history.length === 0">
+                    <!-- <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status"> -->
+                        <span>Loading...</span>
+                      <!-- </div> -->
+                </div>
+                <div class="row mb-3" *ngFor="let item of history; index as i">
+                    <div class="col-sm-9 col-md-9 history-list d-flex align-items-center justify-content-between">
+                        <!-- <div>{{i+1}}</div> -->
+                        <div>{{item?.finished_on | date:'dd/MM/yy'}}</div>
+                        <div>{{item?.score}}/{{item.max_score}}</div>
+                        <div class="d-block d-sm-block d-md-none">
+                            <button type="button" class="radius-lghtbtn" (click)="resultSelect(item)">Result</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 d-none d-sm-none d-md-block">
+                        <button type="button" class="radius-lghtbtn" (click)="resultSelect(item)">Result</button>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="radius-drkbtn" (click)="beginTest()">Take test</button>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="resultSelected">
+            <!-- <div class="card" style="border-radius:20px">
+                <div class="card-header text-light"
+                    style="background-color: '#254e45';border-top-right-radius:20px;border-top-left-radius:20px">
+                    <div class="row justify-content-center font-weight-bold">
+                            My Result
+                    </div>
+                </div>
+                <div class="card-body" style="max-height: 500px; overflow: scroll;">
+                    <app-assessment-result [testResult]="selectedResult" (viewHistoryBtnClick)="resultSelected = false"></app-assessment-result>
+                </div>
+
+            </div> -->
+            <app-assessment-result [historyItemSelected]="historyItemSelected" [testResult]="selectedResult" (viewHistoryBtnClick)="resultSelected = false"></app-assessment-result>
+        </ng-container>
+    </div>
+</div>

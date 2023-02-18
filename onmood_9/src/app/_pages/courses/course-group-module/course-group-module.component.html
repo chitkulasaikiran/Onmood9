@@ -1,0 +1,35 @@
+<div class="main-wrapper">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center modul-head">
+            <div (click)="goBack()"><img src="assets/img/wht-arrow.png" /></div>
+            <div><span class="module-name">{{selectedGroupName}}</span></div>
+            <div>&nbsp;</div>
+        </div>
+
+        <div class="ptb60 services">
+            <div class="row">
+                <div *ngIf="groupModules.length === 0">
+                    {{noModulesText}}
+                </div>
+                <div [routerLink]="module.sessionLinkAvailable ? [module.sessionsLink] : []"  style="outline: none;" class="col-md-6 d-flex align-items-stretch" *ngFor="let module of groupModules" data-aos="fade-up" data-aos-delay="100">
+                    <div class="icon-box">
+                        <img [src]="moduleImagePath + module.module_image" alt="">
+                        <i *ngIf="module.showLockIcon" class="fa fa-lock lock-icon"></i>
+                        <h4 *ngIf="module.module_name.length <= 20">
+                            <a>{{module.module_name}}</a>
+                        </h4>
+                        <h4 *ngIf="module.module_name.length > 20">
+                            <a>{{module.module_name | slice: 0: 20}}...</a>
+                        </h4>
+                        
+
+                        <p *ngIf="module.short_description.length <= 80">
+                                {{module.short_description}}</p>
+                        <p *ngIf="module.short_description.length > 80">
+                            {{module.short_description | slice: 0: 80}}...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

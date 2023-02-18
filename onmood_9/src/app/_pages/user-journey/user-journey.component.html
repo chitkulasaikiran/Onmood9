@@ -1,0 +1,78 @@
+<!-- <p>dashboard works!</p> -->
+<div class="main-wrapper" #carosalHeader style="margin-top: 60px;">
+    <div style="margin-top: 70px; min-height: 350px;" class="container ">
+        <div class="row justify-content-center font-weight-bold">
+            <label style="color:#37726C; font-size:20px">
+                My Journey
+            </label>
+        </div>
+        <div class="row">
+            <div class="col-6 text-right">
+                <label class="small font-weight-bold"><i class="fa fa-clock-o text-warning" aria-hidden="true"></i> TIME
+                    SPENT</label>
+            </div>
+            <div class="col-6 text-left">
+                <label class="small font-weight-bold "><i class="fa fa-headphones text-warning" aria-hidden="true"></i>
+                    SESSINS COMPLETED</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 text-right">
+                <label class="font-weight-bold" style="font-size: 30px;">{{completedHours}}</label>
+                <label class="font-weight-bold small">hrs</label>
+            </div>
+            <div class="col-6 text-left">
+                <label class="font-weight-bold" style="font-size: 30px;">{{completedSessions.length}}</label>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 text-right">
+                <button class="btn ml-2 options-btn" style="border-radius:'6px' "
+                [class.activeBtn]="selectedOptionInd === 0" (click)="selectedOptionInd = 0;getJourneyData()">
+                    1 WEEK
+                </button>
+            </div>
+            <div class="col-6 text-left">
+                <button class="btn ml-2 options-btn" style="border-radius:'6px' " 
+                [class.activeBtn]="selectedOptionInd === 1" (click)="selectedOptionInd = 1;getJourneyData()">
+                    1 MONTH
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 text-right pt-2" >
+                <button class="btn ml-2 options-btn" style="border-radius:'6px'" 
+                [class.activeBtn]="selectedOptionInd === 2"
+                (click)="selectedOptionInd = 2;getJourneyData()">
+                    1 YEAR
+                </button>
+            </div>
+            <div class="col-6 text-left pt-2" >
+                <button class="btn ml-2 options-btn" style="border-radius:'6px' " 
+                [class.activeBtn]="selectedOptionInd === 3"
+            (click)="selectedOptionInd = 3;getJourneyData()">
+                    TILL DATE
+                </button>
+            </div>
+        </div>
+        <div class="row pt-2 justify-content-center pt-2 row">
+                <div style="width: 250px; height: 300px; overflow: auto;border: #1d4844 solid 2px; border-radius: 8px"
+                class="ml-4 text-center">
+                <button class="btn ml-2 session-btn btn-sm mt-2 session-btn w-75" 
+                    style="border-radius:'6px' " [class.activeBtn]="selectedSessionInd === -1"
+                    (click)="selectedSessionInd = -1;getJourneyData()" >
+                    All
+                </button>
+                <span *ngFor="let item of visitedCategories; index as i">
+                    <button class="btn ml-2 session-btn btn-sm mt-2 session-btn w-75" 
+                    style="border-radius:'6px' " [class.activeBtn]="selectedSessionInd === i"
+                    (click)="selectedSessionInd = i;getJourneyData()" >
+                        {{item.name}}
+                    </button>
+                </span>
+            
+            </div>
+        </div>
+    </div>
+</div>

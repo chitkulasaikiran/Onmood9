@@ -1,0 +1,21 @@
+<div class="main-wrapper" [style.min-height]="deviceHeight +'px'">
+	<div class="container">
+		<app-learn-assessment-tabs  [activeIndex]="1"></app-learn-assessment-tabs>
+		<div class="text-center mt-5 green-txt">
+			Select any test below to assess your emotional wellbeing status.
+		</div>
+		<div class="row mt-5">
+			<div class="col-sm-6 col-md-4 col-lg-3 text-center mb-4" (click)="navigateToDetails(item)" *ngFor="let item of assessmentsData">
+				<div class="prod-img assess-img">
+					<img src="{{item.assessment_image}}" />
+
+					<div class="asses-scrore" *ngIf="item.finishedOn != ''">
+						<div class="lastscrore">Last Score : {{item?.userLastScore}}/{{item.max_score}}</div>
+						<div>{{item.finishedOn | date:'MMMM d, y'}}</div>
+					</div>
+				</div>
+				<div class="learn-video mt-3"><a href="">{{item.title}}</a></div>
+			</div>
+		</div>
+	</div>
+</div>

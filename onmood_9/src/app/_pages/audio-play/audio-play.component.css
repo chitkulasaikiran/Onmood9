@@ -1,0 +1,347 @@
+/* Modal Content */
+@media only screen and (max-width: 1360px) {
+    .modal-content-audio {
+      background-color: #50C2B8; 
+      margin: auto;
+      border: 1px solid #888;
+      width: 100%;
+      height: 100vh;
+    }
+    .playIconDiv {
+        width: 50px;
+        position: relative;
+        left: 43%;
+        /* background-color: #000; */
+        background: orangered;
+        cursor: pointer;
+        height: 50px;
+        border-radius: 50px;
+    }
+    .seekBarControls {
+        text-align: center;
+        display: flex;
+        margin-left: 15%;
+        margin-right: 15%;
+        margin-top: 2%;
+        margin-top: -65px;
+    }
+  
+    .audioDuration {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #fff;
+        margin-left: 15%;
+        margin-right: 15%;
+        margin-top: 3%;
+        color: #fff;
+    }
+    .session_music {
+        width: 50%; 
+        margin-left: 16px;
+    }
+    
+    
+  }
+  
+  @media only screen and (min-width: 600px) {
+    .modal-content-audio {
+        background-color: #50C2B8;
+        margin: auto;
+        border: 1px solid #888;
+        /* /* width: 40%; */
+        height: 100%;
+        /* margin-top: 60px; */
+    }
+    .playIconDiv {
+        width: 50px;
+        position: relative;
+        left: 45%;
+        /* background-color: #000; */
+        background: orangered;
+        cursor: pointer;
+        height: 50px;
+        border-radius: 50px;
+    }
+    .seekBarControls {
+        text-align: center;
+        display: flex;
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+    .seekBarControls1 {
+        text-align: center;
+        display: flex;
+        margin-top: 35px;
+        margin-left: 35%;
+        margin-right: 35%;
+    }
+  
+    .audioDuration {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #fff;
+        margin-left: 25%;
+        margin-right: 25%;
+        margin-top: 2%;
+        color: #fff;
+    }
+  
+    .session_music {
+        width: 25%; 
+        margin-left: 16px;
+    }
+  }
+
+  .isFileSelected {
+    background-color: #ccc;
+    font-size: 22px;
+    font-weight: bolder;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .isFileNotSelected {
+    padding: 10px 30px 10px 30px; 
+    cursor: pointer;
+
+  }
+  
+  
+  
+  /* The Close Button */
+  .close {
+    background-color: #FFF;
+    color: #000;
+    padding: 10px;
+    border-radius: 50px;
+    margin: 10px;
+    width: 35px;
+    text-align: center;
+    position: absolute;
+    float: right;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 999;
+  }
+  
+  .close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .moduleTitle {
+    text-align: center; 
+    font-size: 20px; 
+    color: #FFF;  
+    margin: auto;
+    margin-top: 50px;
+    align-items: center;
+    text-align: center;
+    /* font-family: 'Montserrat', sans-serif; */
+  }
+  .sessionTitle {
+    text-align: center; 
+    font-size: 22px; 
+    color: #FFF; 
+    padding-top: 10px;
+    text-align: center;
+    margin: auto;
+    align-items: center;
+    /* font-family: 'Montserrat', sans-serif; */
+  }
+  
+  
+  .playIcon {
+    font-size: 36px;
+    color: white;
+     /* padding-top: 12px; */
+    padding-left: 12px;
+  }
+  
+  .pauseIcon {
+    font-size: 36px;
+    color: white;
+     /* padding-top: 12px; 
+      padding-left: 6px; 
+    } */
+  }
+
+
+  /* --------------Progress-------------------------------- */
+.progress {
+    width: 100px;
+    height: 100px;
+    background: none;
+    position: relative;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  .progress::after {
+    /* content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 6px solid #eee;
+    position: absolute;
+    top: 0;
+    left: 0; */
+  }
+  
+  .progress>span {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .progress .progress-left {
+    left: 0;
+  }
+  
+  .progress .progress-bar {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border-width: 6px;
+    border-style: solid;
+    position: absolute;
+    top: 0;
+  }
+  
+  .progress .progress-left .progress-bar {
+    left: 100%;
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px;
+    border-left: 0;
+    -webkit-transform-origin: center left;
+    transform-origin: center left;
+  }
+  
+  .progress .progress-right {
+    right: 0;
+  }
+  
+  .progress .progress-right .progress-bar {
+    left: -100%;
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    border-right: 0;
+    -webkit-transform-origin: center right;
+    transform-origin: center right;
+  }
+  
+  .progress .progress-value {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #EF6603;
+  }
+
+/* --------background-music---------------------- */
+.background-music { 
+    padding: 5px 0px 5px 0px;
+    border: 0.5px solid #254e45;
+    text-align: center;
+    margin: 10px;
+    background-color: #fff;
+}
+.background-music.isSelected {
+    color: #ef6603;
+    
+}
+.background-music .music:hover {
+    color: #607D8B;
+    background-color: #DDD;
+    left: .1em;
+}
+.background-music .music.selected {
+    background-color: #CFD8DC;
+    color: #ef6603; 
+} 
+.background-music .music.selected:hover {
+    background-color: #BBD8DC;
+    color: white;
+}
+
+
+
+.progress-circle {
+  position: relative;
+  /* padding-left: 30px; */
+  /* padding-right: 30px; */
+  border: 1px solid black;
+}
+.circlePlayIcon {
+  position: absolute;
+  /* top: 35%; */
+  /* left: 35%; */
+  /* font-size: 36px; */
+  color: white;
+  /* padding-left: 18px; */
+  z-index: 9999;
+}
+
+@media only screen and (max-width: 600px) {
+  .progress-circle {
+    position: relative;
+    /* padding-left: 30px; */
+    /* padding-right: 30px; */
+    /* border: 1px solid yellow; */
+  }
+}
+
+
+.circle-block {
+  /* margin: 69px 60px 0px 60px; */
+  margin-top: 30px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circle-block img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.skipBackBlock {
+  margin: 34px 30px 34px 0px; 
+  cursor:pointer;
+}
+
+.skipAheadBlock{
+  margin: 34px 0px 34px 30px; 
+  cursor:pointer;
+}
+
+.img_container {
+  position: relative;
+  text-align: center;
+  height:120px;
+  width: 120px;
+  /* border:2px solid black; */
+}
+
+.img_container > svg {
+  position: absolute;;
+  top: calc(50% - 15px); /* 50% - 3/4 of icon height */
+  font-size: 30px;
+  color: #ffffff;
+  margin-left: -7px;
+  z-index: 9999;
+}
+
+.img_container > div {
+  position: absolute;
+  top: calc(50% - 25px);
+  font-size: 30px;
+  color: #ffffff;
+  margin-left: -7px;
+  z-index: 9999;
+  left: calc(50% - 1px);
+}

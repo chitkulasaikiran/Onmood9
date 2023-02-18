@@ -1,0 +1,131 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "onmood9_14": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/onmood9_14",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/manifest.webmanifest"
+            ],
+            "styles": [
+              "src/styles.css",
+              "src/custom-css/all.css",
+              "src/custom-css/bootstrap.min.css",
+              "src/custom-css/custom.css",
+              "src/custom-css/responsive.css",
+              "src/custom-css/owl.carousel.min.css",
+              "src/custom-css/owl.theme.default.min.css"  
+            ],
+            "scripts": [
+              "src/custom-js/jquery.slim.min.js",
+              "src/custom-js/bootstrap.bundle.min.js",
+              "src/custom-js/custom.js",
+              "src/custom-js/owl.carousel.js",
+              "src/custom-js/jquery.min.js",
+              "src/assets/greet.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "onmood9_14:build:production"
+            },
+            "development": {
+              "browserTarget": "onmood9_14:build:development"
+            },
+            "hmr": {
+              "hmr": true,
+              "browserTarget": "onmood9_14:build:hmr"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "onmood9_14:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/manifest.webmanifest"
+            ],
+            "styles": [
+              "src/styles.css",
+              "src/custom-css/all.css",
+              "src/custom-css/bootstrap.min.css",
+              "src/custom-css/custom.css",
+              "src/custom-css/responsive.css",
+              "src/custom-css/owl.carousel.min.css",
+              "src/custom-css/owl.theme.default.min.css"  
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "f9a266df-ca2f-4937-a702-ea9a733193c7"
+  }
+}

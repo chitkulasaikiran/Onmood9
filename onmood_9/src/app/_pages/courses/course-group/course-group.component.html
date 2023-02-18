@@ -1,0 +1,59 @@
+<div class="main-wrapper">
+    <div *ngIf="currentActiveModule" class="paybutton" (click)="gotoActiveModule()">
+        <span>Continue - {{currentActiveModule.module_name}}</span><img style="margin-left: 7px;" src="assets/img/play1.png" alt="" />
+    </div>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center modul-head">
+            <div (click)="goBack()"><img src="assets/img/wht-arrow.png" /></div>
+            <div><span class="module-name">{{selectedCourseName}}</span></div>
+            <div>&nbsp;</div>
+        </div>
+
+        <div class="ptb60" style="margin-bottom: 40px; margin-top: 40px;">
+            <div class="grup-head d-flex justify-content-between align-items-center" *ngIf="isVideoAvailable">
+                <div class="prod-img" style="cursor: pointer;" (click)="playVideo()">
+                    <video *ngIf="isVideoThumbAvailable" poster="{{videoThumbNail}}" id="video2" #video2 style="border-radius: 20px; width: 315px;">
+                        <source  src="{{categoryVideoUrl}}" type="video/mp4">
+                    </video>
+                    <video *ngIf="!isVideoThumbAvailable" id="video2" #video2 style="border-radius: 20px; width: 315px;">
+                        <source  src="{{categoryVideoUrl}}" type="video/mp4">
+                    </video>
+                </div>
+                <div class="text-center">
+                    <div>
+                        <p>{{selectedCourse.description}}</p>
+                    </div>
+                    <div>
+                        <button (click)="playVideo()" type="button" class="light-btn">Watch Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="category" *ngFor="let group of courseGroups; index as i">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5>{{group.group_name}}</h5>
+                <a class="viewmore" routerLink="/onmood-course/{{categoryId}}/course/{{courseId}}/group/{{group.id}}/modules">View All ></a>
+            </div>
+            <carousel class="carousel-html-content" style="z-index: 0" #carouselUseCase="carousel"
+                [height]="group.height" [cellsToShow]="group.customOptions.items" [loop]="false"
+                [arrows]="false" (events)="gotoFeaturedModuleDetails($event, i, group)">
+                <div class="carousel-cell item" *ngFor="let module of group.modules; index as j">
+					<div class="prod-img">
+                        <img [src]="moduleImagePath + module.module_image" alt=""/>
+                        <i *ngIf="module.showLockIcon" class="fa fa-lock lock-icon"></i>
+                    </div>
+					<div class="category-name"><a href="">{{ module.module_name }}</a></div>
+				</div>
+            </carousel>
+        </div>
+    </div>
+    <div class="videoDiv" #videoDiv>
+        <span class="closeVideoIcon" #closeVideoIcon (click)="closeVideo()">X</span>
+        <video controls id="video1" #video1 controlsList="nodownload"
+        style="width: 100%; height: 0; margin:0 auto;" (timeupdate)="onTimeUpdate($event)">
+            <source src="{{categoryVideoUrl}}" type="video/mp4">
+            Your browser doesn't support HTML5 video tag.
+        </video>
+    </div>
+</div>
